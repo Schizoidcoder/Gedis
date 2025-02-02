@@ -19,6 +19,7 @@ func ListenAndServeWithSignal(cfg *Config, handler tcp.Handler) error {
 
 	closeChan := make(chan struct{})
 	sigChan := make(chan os.Signal)
+	//这里是监听系统操作的信号，开启一个协程有信号就传
 	signal.Notify(sigChan, syscall.SIGHUP, syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT)
 	go func() {
 		sig := <-sigChan
@@ -27,11 +28,14 @@ func ListenAndServeWithSignal(cfg *Config, handler tcp.Handler) error {
 			closeChan <- struct{}{}
 		}
 	}()
+
+	//开一个监听服务端的端口号
 	listener, err := net.Listen("tcp", cfg.Address)
 	if err != nil {
 		return err
 	}
 	logger.Info("tcp server listening on " + cfg.Address)
+
 	ListenAndServe(listener, handler, closeChan)
 	return nil
 }

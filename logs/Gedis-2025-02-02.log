@@ -1,0 +1,5 @@
+2025/02/02 21:50:28 [INFO][server.go:37] tcp server listening on 0.0.0.0:6399
+2025/02/02 21:53:59 [INFO][server.go:37] tcp server listening on 0.0.0.0:6399
+2025/02/02 21:55:37 [INFO][server.go:66] tcp new connection from [::1]:59193
+2025/02/02 21:56:29 [INFO][echo.go:48] Connection closed by remote host
+2025/02/02 21:56:52 [INFO][server.go:49] tcp server shutting down
