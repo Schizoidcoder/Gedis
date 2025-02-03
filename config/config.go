@@ -1,6 +1,8 @@
 package config
 
 import (
+	"Gedis/lib/logger"
+	"Gedis/lib/utils"
 	"bufio"
 	"io"
 	"os"
@@ -9,10 +11,6 @@ import (
 	"strconv"
 	"strings"
 	"time"
-
-	"github.com/hdt3213/godis/lib/utils"
-
-	"github.com/hdt3213/godis/lib/logger"
 )
 
 var (
