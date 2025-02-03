@@ -2,10 +2,12 @@ package parser
 
 import (
 	"Gedis/interface/resp"
+	"Gedis/resp/reply"
 	"bufio"
 	"errors"
 	"io"
 	"strconv"
+	"strings"
 )
 
 type Payload struct {
@@ -60,6 +62,7 @@ func readLine(bufReader *bufio.Reader, state *readState) ([]byte, bool, error) {
 	return msg, false, nil
 }
 
+//解析头部
 func parseMultiBulkHeader(msg []byte, state *readState) error {
 	var err error
 	var expectedLine uint64
@@ -101,4 +104,23 @@ func parseBulkHeader(msg []byte, state *readState) error {
 		return errors.New("protocol error:" + string(msg))
 	}
 
+}
+
+//+OK -err
+func parseSingleLineReply(msg []byte) (resp.Reply, error) {
+	str := strings.TrimSuffix(string(msg), "\r\n") //切掉后面的\r\n
+	var result resp.Reply
+	switch msg[0] {
+	case '+':
+		result = reply.MakeStatusReply(str[1:])
+	case '-':
+		result = reply.MakeErrReply(str[1:])
+	case ':':
+		val, err := strconv.ParseInt(str[1:], 10, 64)
+		if err != nil {
+			return nil, errors.New("protocol error:" + string(msg))
+		}
+		result = reply.MakeIntReply(val)
+	}
+	return result, nil
 }
