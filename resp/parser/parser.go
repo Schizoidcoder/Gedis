@@ -17,10 +17,10 @@ type Payload struct {
 
 type readState struct {
 	readingMultiLine  bool //解析器解析的是单行还是多行
-	expectedArgsCount int  //期望长度
+	expectedArgsCount int  // 期望的参数数量
 	msgType           byte
-	args              [][]byte
-	bulkLen           int64 //bulkLen 存储的是批量字符串的字节长度（$len\r\n）len=bulkLen
+	args              [][]byte //解析的内容
+	bulkLen           int64    //bulkLen 存储的是批量字符串的字节长度（$len\r\n）len=bulkLen
 }
 
 func (s *readState) finished() bool {
@@ -63,6 +63,8 @@ func readLine(bufReader *bufio.Reader, state *readState) ([]byte, bool, error) {
 }
 
 //解析头部
+
+//*3$4\r\nPing\r\n$4\r\nPing\r\n$4\r\nPing\r\n
 func parseMultiBulkHeader(msg []byte, state *readState) error {
 	var err error
 	var expectedLine uint64
@@ -123,4 +125,25 @@ func parseSingleLineReply(msg []byte) (resp.Reply, error) {
 		result = reply.MakeIntReply(val)
 	}
 	return result, nil
+}
+
+// $0\r\n $3\r\n
+func readBody(msg []byte, state *readState) error {
+	line := msg[0 : len(msg)-2]
+	var err error
+	//$3
+	if line[0] == '$' {
+		state.bulkLen, err = strconv.ParseInt(string(line[1:]), 10, 64)
+		if err != nil {
+			return errors.New("protocol error:" + string(msg))
+		}
+		//$0
+		if state.bulkLen <= 0 {
+			state.args = append(state.args, []byte{})
+			state.bulkLen = 0
+		}
+	} else {
+		state.args = append(state.args, line)
+	}
+	return nil
 }
