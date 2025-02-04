@@ -14,6 +14,12 @@ type Connection struct {
 	selectedDB   int
 }
 
+func NewConn(conn net.Conn) *Connection {
+	return &Connection{
+		conn: conn,
+	}
+}
+
 // RemoteAddr 看连接客户端的地址
 func (c *Connection) RemoteAddr() net.Addr {
 	return c.conn.RemoteAddr()
