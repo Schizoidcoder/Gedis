@@ -140,7 +140,7 @@ func readLine(bufReader *bufio.Reader, state *readState) ([]byte, bool, error) {
 		if err != nil { // io错误
 			return nil, true, err
 		}
-		if len(msg) == 0 || msg[len(msg)-2] != '\r' || msg[len(msg)-1] != '\n' {
+		if len(msg) <= 2 || msg[len(msg)-2] != '\r' || msg[len(msg)-1] != '\n' {
 			return nil, false, errors.New("protocol error:" + string(msg))
 		}
 	} else { //2.之前读到了$数字，严格读取字符个数

@@ -1,0 +1,173 @@
+[INFO][server.go:37] 2025/02/05 00:33:03 tcp server listening on 0.0.0.0:6379
+[INFO][server.go:66] 2025/02/05 00:33:30 tcp new connection from 127.0.0.1:49761
+[INFO][echo_database.go:25] 2025/02/05 00:36:19 EchoDatabase AfterClientClose
+[INFO][handler.go:56] 2025/02/05 00:36:19 connection closed127.0.0.1:49761
+[INFO][server.go:66] 2025/02/05 00:36:23 tcp new connection from 127.0.0.1:49875
+[ERROR][handler.go:75] 2025/02/05 00:36:43 require multi bulk reply
+[INFO][echo_database.go:25] 2025/02/05 00:39:18 EchoDatabase AfterClientClose
+[INFO][handler.go:56] 2025/02/05 00:39:18 connection closed127.0.0.1:49875
+[INFO][server.go:66] 2025/02/05 00:39:20 tcp new connection from 127.0.0.1:49964
+[INFO][echo_database.go:25] 2025/02/05 00:41:22 EchoDatabase AfterClientClose
+[INFO][handler.go:56] 2025/02/05 00:41:22 connection closed127.0.0.1:49964
+[INFO][server.go:66] 2025/02/05 00:41:22 tcp new connection from 127.0.0.1:50547
+[INFO][server.go:49] 2025/02/05 00:41:31 tcp server shutting down
+[INFO][handler.go:89] 2025/02/05 00:41:31 handler shutting down
+[INFO][echo_database.go:21] 2025/02/05 00:41:31 EchoDatabase Close
+[INFO][echo_database.go:25] 2025/02/05 00:41:31 EchoDatabase AfterClientClose
+[INFO][handler.go:56] 2025/02/05 00:41:31 connection closed127.0.0.1:50547
+[INFO][handler.go:89] 2025/02/05 00:41:31 handler shutting down
+[INFO][echo_database.go:21] 2025/02/05 00:41:31 EchoDatabase Close
+[INFO][server.go:37] 2025/02/05 00:41:34 tcp server listening on 0.0.0.0:6379
+[INFO][server.go:66] 2025/02/05 00:41:40 tcp new connection from 127.0.0.1:50570
+[INFO][echo_database.go:25] 2025/02/05 00:42:53 EchoDatabase AfterClientClose
+[INFO][handler.go:56] 2025/02/05 00:42:53 connection closed127.0.0.1:50570
+[INFO][server.go:66] 2025/02/05 00:43:20 tcp new connection from [240e:3bb:2e92:3670:c541:f0d6:67a0:afe6]:50621
+[INFO][server.go:49] 2025/02/05 00:48:54 tcp server shutting down
+[INFO][handler.go:89] 2025/02/05 00:48:54 handler shutting down
+[INFO][echo_database.go:21] 2025/02/05 00:48:54 EchoDatabase Close
+[INFO][echo_database.go:25] 2025/02/05 00:48:54 EchoDatabase AfterClientClose
+[INFO][handler.go:56] 2025/02/05 00:48:54 connection closed[240e:3bb:2e92:3670:c541:f0d6:67a0:afe6]:50621
+[INFO][handler.go:89] 2025/02/05 00:48:54 handler shutting down
+[INFO][echo_database.go:21] 2025/02/05 00:48:54 EchoDatabase Close
+[INFO][server.go:37] 2025/02/05 00:48:57 tcp server listening on 0.0.0.0:6379
+[INFO][server.go:66] 2025/02/05 00:49:03 tcp new connection from [240e:3bb:2e92:3670:c541:f0d6:67a0:afe6]:50843
+[INFO][echo.go:48] 2025/02/05 00:49:35 Connection closed by remote host
+[INFO][server.go:49] 2025/02/05 00:51:22 tcp server shutting down
+[INFO][echo.go:63] 2025/02/05 00:51:22 handler shutting down
+[INFO][server.go:37] 2025/02/05 00:51:26 tcp server listening on 0.0.0.0:6379
+[INFO][server.go:66] 2025/02/05 00:51:27 tcp new connection from 127.0.0.1:51010
+[ERROR][handler.go:75] 2025/02/05 00:52:40 require multi bulk reply
+[ERROR][handler.go:75] 2025/02/05 00:52:40 require multi bulk reply
+[ERROR][handler.go:75] 2025/02/05 00:52:40 require multi bulk reply
+[ERROR][handler.go:75] 2025/02/05 00:53:51 require multi bulk reply
+[ERROR][handler.go:75] 2025/02/05 00:53:51 require multi bulk reply
+[ERROR][handler.go:75] 2025/02/05 00:53:51 require multi bulk reply
+[ERROR][parser.go:41] 2025/02/05 00:53:51 goroutine 34 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x64
+Gedis/resp/parser.parse0.func1()
+	/Users/hhz/GolandProjects/Gedis/resp/parser/parser.go:41 +0x2c
+panic({0x104386520?, 0x1400019e000?})
+	/usr/local/go/src/runtime/panic.go:785 +0x124
+Gedis/resp/parser.readLine(0x14000198010?, 0x1400022feb0?)
+	/Users/hhz/GolandProjects/Gedis/resp/parser/parser.go:143 +0x270
+Gedis/resp/parser.parse0({0x12b038008, 0x14000206000?}, 0x14000226000)
+	/Users/hhz/GolandProjects/Gedis/resp/parser/parser.go:51 +0x164
+created by Gedis/resp/parser.ParseStream in goroutine 33
+	/Users/hhz/GolandProjects/Gedis/resp/parser/parser.go:34 +0x8c
+
+[INFO][server.go:49] 2025/02/05 00:54:01 tcp server shutting down
+[INFO][handler.go:89] 2025/02/05 00:54:01 handler shutting down
+[INFO][echo_database.go:21] 2025/02/05 00:54:01 EchoDatabase Close
+[INFO][server.go:37] 2025/02/05 00:54:34 tcp server listening on 0.0.0.0:6379
+[INFO][server.go:49] 2025/02/05 00:54:37 tcp server shutting down
+[INFO][handler.go:89] 2025/02/05 00:54:37 handler shutting down
+[INFO][echo_database.go:21] 2025/02/05 00:54:37 EchoDatabase Close
+[INFO][server.go:37] 2025/02/05 00:55:12 tcp server listening on 0.0.0.0:6379
+[INFO][server.go:66] 2025/02/05 00:55:15 tcp new connection from 127.0.0.1:51179
+[ERROR][parser.go:41] 2025/02/05 00:56:26 goroutine 37 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x64
+Gedis/resp/parser.parse0.func1()
+	/Users/hhz/GolandProjects/Gedis/resp/parser/parser.go:41 +0x3c
+panic({0x102824280?, 0x1400011a060?})
+	/usr/local/go/src/runtime/panic.go:785 +0xf0
+Gedis/resp/parser.readLine(0x1400012c060, 0x140000bfd88)
+	/Users/hhz/GolandProjects/Gedis/resp/parser/parser.go:143 +0x460
+Gedis/resp/parser.parse0({0x1094d8f18, 0x14000114008}, 0x14000128000)
+	/Users/hhz/GolandProjects/Gedis/resp/parser/parser.go:51 +0xb4
+created by Gedis/resp/parser.ParseStream in goroutine 36
+	/Users/hhz/GolandProjects/Gedis/resp/parser/parser.go:34 +0xec
+
+[INFO][server.go:49] 2025/02/05 00:59:44 tcp server shutting down
+[INFO][handler.go:89] 2025/02/05 00:59:44 handler shutting down
+[INFO][echo_database.go:21] 2025/02/05 00:59:44 EchoDatabase Close
+[INFO][server.go:37] 2025/02/05 00:59:52 tcp server listening on 0.0.0.0:6379
+[INFO][server.go:66] 2025/02/05 00:59:54 tcp new connection from 127.0.0.1:51721
+[INFO][server.go:49] 2025/02/05 01:00:30 tcp server shutting down
+[INFO][handler.go:89] 2025/02/05 01:00:30 handler shutting down
+[INFO][echo_database.go:21] 2025/02/05 01:00:30 EchoDatabase Close
+[INFO][echo_database.go:25] 2025/02/05 01:00:30 EchoDatabase AfterClientClose
+[INFO][handler.go:56] 2025/02/05 01:00:30 connection closed127.0.0.1:51721
+[INFO][handler.go:89] 2025/02/05 01:00:30 handler shutting down
+[INFO][echo_database.go:21] 2025/02/05 01:00:30 EchoDatabase Close
+[INFO][server.go:37] 2025/02/05 01:00:43 tcp server listening on 0.0.0.0:6379
+[INFO][server.go:66] 2025/02/05 01:00:45 tcp new connection from 127.0.0.1:51841
+[ERROR][handler.go:75] 2025/02/05 01:00:48 require multi bulk reply
+[ERROR][handler.go:75] 2025/02/05 01:00:53 require multi bulk reply
+[ERROR][handler.go:75] 2025/02/05 01:00:56 require multi bulk reply
+[INFO][server.go:49] 2025/02/05 01:01:54 tcp server shutting down
+[INFO][handler.go:89] 2025/02/05 01:01:54 handler shutting down
+[INFO][echo_database.go:21] 2025/02/05 01:01:54 EchoDatabase Close
+[INFO][echo_database.go:25] 2025/02/05 01:01:54 EchoDatabase AfterClientClose
+[INFO][handler.go:56] 2025/02/05 01:01:54 connection closed127.0.0.1:51841
+[INFO][handler.go:89] 2025/02/05 01:01:54 handler shutting down
+[INFO][echo_database.go:21] 2025/02/05 01:01:54 EchoDatabase Close
+[INFO][server.go:37] 2025/02/05 01:01:56 tcp server listening on 0.0.0.0:6379
+[INFO][server.go:66] 2025/02/05 01:01:59 tcp new connection from 127.0.0.1:51946
+[INFO][server.go:49] 2025/02/05 01:02:37 tcp server shutting down
+[INFO][handler.go:89] 2025/02/05 01:02:37 handler shutting down
+[INFO][echo_database.go:21] 2025/02/05 01:02:37 EchoDatabase Close
+[INFO][echo_database.go:25] 2025/02/05 01:02:37 EchoDatabase AfterClientClose
+[INFO][handler.go:56] 2025/02/05 01:02:37 connection closed127.0.0.1:51946
+[INFO][handler.go:89] 2025/02/05 01:02:37 handler shutting down
+[INFO][echo_database.go:21] 2025/02/05 01:02:37 EchoDatabase Close
+[INFO][server.go:37] 2025/02/05 01:03:06 tcp server listening on 0.0.0.0:6379
+[INFO][server.go:66] 2025/02/05 01:03:10 tcp new connection from 127.0.0.1:52044
+[ERROR][parser.go:41] 2025/02/05 01:03:29 goroutine 34 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x64
+Gedis/resp/parser.parse0.func1()
+	/Users/hhz/GolandProjects/Gedis/resp/parser/parser.go:41 +0x3c
+panic({0x100eb0280?, 0x14000214030?})
+	/usr/local/go/src/runtime/panic.go:785 +0xf0
+Gedis/resp/parser.readLine(0x14000232060, 0x1400010fd88)
+	/Users/hhz/GolandProjects/Gedis/resp/parser/parser.go:152 +0x458
+Gedis/resp/parser.parse0({0x147ba0008, 0x14000206000}, 0x1400022e000)
+	/Users/hhz/GolandProjects/Gedis/resp/parser/parser.go:51 +0xb4
+created by Gedis/resp/parser.ParseStream in goroutine 33
+	/Users/hhz/GolandProjects/Gedis/resp/parser/parser.go:34 +0xec
+
+[INFO][server.go:49] 2025/02/05 01:03:39 tcp server shutting down
+[INFO][handler.go:89] 2025/02/05 01:03:39 handler shutting down
+[INFO][echo_database.go:21] 2025/02/05 01:03:39 EchoDatabase Close
+[INFO][server.go:37] 2025/02/05 01:04:20 tcp server listening on 0.0.0.0:6379
+[INFO][server.go:66] 2025/02/05 01:04:22 tcp new connection from 127.0.0.1:52140
+[INFO][server.go:49] 2025/02/05 01:06:29 tcp server shutting down
+[INFO][handler.go:89] 2025/02/05 01:06:29 handler shutting down
+[INFO][echo_database.go:21] 2025/02/05 01:06:29 EchoDatabase Close
+[INFO][echo_database.go:25] 2025/02/05 01:06:29 EchoDatabase AfterClientClose
+[INFO][handler.go:56] 2025/02/05 01:06:29 connection closed127.0.0.1:52140
+[INFO][handler.go:89] 2025/02/05 01:06:29 handler shutting down
+[INFO][echo_database.go:21] 2025/02/05 01:06:29 EchoDatabase Close
+[INFO][server.go:37] 2025/02/05 01:06:33 tcp server listening on 0.0.0.0:6379
+[INFO][server.go:66] 2025/02/05 01:06:35 tcp new connection from 127.0.0.1:52424
+[INFO][echo_database.go:25] 2025/02/05 01:06:35 EchoDatabase AfterClientClose
+[INFO][handler.go:56] 2025/02/05 01:06:35 connection closed127.0.0.1:52424
+[INFO][server.go:66] 2025/02/05 01:06:41 tcp new connection from 127.0.0.1:52429
+[INFO][server.go:49] 2025/02/05 01:07:03 tcp server shutting down
+[INFO][handler.go:89] 2025/02/05 01:07:03 handler shutting down
+[INFO][echo_database.go:21] 2025/02/05 01:07:03 EchoDatabase Close
+[INFO][echo_database.go:25] 2025/02/05 01:07:03 EchoDatabase AfterClientClose
+[INFO][handler.go:56] 2025/02/05 01:07:03 connection closed127.0.0.1:52429
+[INFO][handler.go:89] 2025/02/05 01:07:03 handler shutting down
+[INFO][echo_database.go:21] 2025/02/05 01:07:03 EchoDatabase Close
+[INFO][server.go:37] 2025/02/05 01:07:08 tcp server listening on 0.0.0.0:6379
+[INFO][server.go:66] 2025/02/05 01:07:10 tcp new connection from 127.0.0.1:52475
+[ERROR][parser.go:41] 2025/02/05 01:07:24 goroutine 34 [running]:
+runtime/debug.Stack()
+	/usr/local/go/src/runtime/debug/stack.go:26 +0x64
+Gedis/resp/parser.parse0.func1()
+	/Users/hhz/GolandProjects/Gedis/resp/parser/parser.go:41 +0x3c
+panic({0x104de8280?, 0x140000ac030?})
+	/usr/local/go/src/runtime/panic.go:785 +0xf0
+Gedis/resp/parser.readLine(0x1400008e120, 0x1400010fd88)
+	/Users/hhz/GolandProjects/Gedis/resp/parser/parser.go:152 +0x458
+Gedis/resp/parser.parse0({0x14ba5bfc8, 0x1400009e000}, 0x140000bc000)
+	/Users/hhz/GolandProjects/Gedis/resp/parser/parser.go:51 +0xb4
+created by Gedis/resp/parser.ParseStream in goroutine 33
+	/Users/hhz/GolandProjects/Gedis/resp/parser/parser.go:34 +0xec
+
+[INFO][server.go:49] 2025/02/05 01:07:24 tcp server shutting down
+[INFO][handler.go:89] 2025/02/05 01:07:24 handler shutting down
+[INFO][echo_database.go:21] 2025/02/05 01:07:24 EchoDatabase Close
