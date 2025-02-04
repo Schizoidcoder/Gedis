@@ -14,10 +14,22 @@ import (
 	"sync"
 )
 
+var (
+	unknownErrReplyBytes = []byte("-ERR unknown\r\n")
+)
+
 type RespHandler struct {
 	activeConn sync.Map
 	db         databaseface.Database
 	closing    atomic.Boolean
+}
+
+func MakeHandler() *RespHandler {
+	var db databaseface.Database
+	//Todo : 实现Database
+	return &RespHandler{
+		db: db,
+	}
 }
 
 // closeClient 关闭其中一个客户端连接
@@ -54,7 +66,20 @@ func (r *RespHandler) Handle(ctx context.Context, conn net.Conn) {
 			continue
 		}
 		//exec
-
+		if payload.Data == nil {
+			continue
+		}
+		reply, ok := payload.Data.(*reply.MultiBulkReply)
+		if !ok {
+			logger.Error("require multi bulk reply")
+			continue
+		}
+		result := r.db.Exec(client, reply.Args)
+		if result != nil {
+			_ = client.Write(result.ToBytes())
+		} else {
+			_ = client.Write(unknownErrReplyBytes)
+		}
 	}
 }
 
