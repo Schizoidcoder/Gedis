@@ -16,23 +16,31 @@ func checkPermission(src string) bool {
 }
 
 func isNotExistMkDir(src string) error {
-	if checkNotExist(src) {
-		return mkDir(src)
+	if notExist := checkNotExist(src); notExist == true {
+		if err := mkDir(src); err != nil {
+			return err
+		}
 	}
 	return nil
-
 }
 
 func mkDir(src string) error {
-	return os.MkdirAll(src, os.ModePerm)
+	err := os.MkdirAll(src, os.ModePerm)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func mustOpen(fileName, dir string) (*os.File, error) {
-	if checkPermission(dir) {
+	perm := checkPermission(dir)
+	if perm == true {
 		return nil, fmt.Errorf("permission denied dir: %s", dir)
 	}
 
-	if err := isNotExistMkDir(dir); err != nil {
+	err := isNotExistMkDir(dir)
+	if err != nil {
 		return nil, fmt.Errorf("error during make dir %s, err: %s", dir, err)
 	}
 

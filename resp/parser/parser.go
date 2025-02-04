@@ -45,7 +45,7 @@ func parse0(reader io.Reader, ch chan<- *Payload) {
 	var state readState
 	var err error
 	var msg []byte
-	for true {
+	for {
 		var ioErr bool
 		// 按\r\n读行
 		msg, ioErr, err = readLine(bufReader, &state)
@@ -107,7 +107,7 @@ func parse0(reader io.Reader, ch chan<- *Payload) {
 				continue
 			}
 		} else {
-			err := readBody(msg, &state)
+			err = readBody(msg, &state)
 			if err != nil {
 				ch <- &Payload{
 					Err: errors.New("protocol error: " + string(msg)),
@@ -140,7 +140,7 @@ func readLine(bufReader *bufio.Reader, state *readState) ([]byte, bool, error) {
 		if err != nil { // io错误
 			return nil, true, err
 		}
-		if len(msg) == 0 || msg[len(msg)-2] != '\r' {
+		if len(msg) == 0 || msg[len(msg)-2] != '\r' || msg[len(msg)-1] != '\n' {
 			return nil, false, errors.New("protocol error:" + string(msg))
 		}
 	} else { //2.之前读到了$数字，严格读取字符个数
@@ -174,7 +174,8 @@ func parseMultiBulkHeader(msg []byte, state *readState) error {
 		state.msgType = msg[0]
 		state.readingMultiLine = true
 		state.expectedArgsCount = int(expectedLine)
-		state.args = make([][]byte, state.expectedArgsCount)
+		//state.args = make([][]byte, state.expectedArgsCount)
+		state.args = make([][]byte, 0, expectedLine)
 		return nil
 	} else {
 		return errors.New("protocol error:" + string(msg))

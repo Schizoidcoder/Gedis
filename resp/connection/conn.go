@@ -26,7 +26,7 @@ func (c *Connection) RemoteAddr() net.Addr {
 }
 
 func (c *Connection) Close() error {
-	c.waitingReply.WaitWithTimeout(10 * time.Second)
+	c.waitingReply.WaitWithTimeout(1 * time.Second)
 	_ = c.conn.Close()
 	return nil
 }

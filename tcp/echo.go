@@ -18,7 +18,7 @@ type EchoClient struct {
 }
 
 func (e *EchoClient) Close() error {
-	e.Waiting.WaitWithTimeout(10 * time.Second)
+	e.Waiting.WaitWithTimeout(1 * time.Second)
 	_ = e.Conn.Close()
 	return nil
 }
@@ -41,7 +41,7 @@ func (handler *EchoHandler) Handle(ctx context.Context, conn net.Conn) {
 	}
 	handler.activeConn.Store(client, struct{}{})
 	reader := bufio.NewReader(conn)
-	for true {
+	for {
 		msg, err := reader.ReadString('\n')
 		if err != nil {
 			if err == io.EOF {

@@ -58,7 +58,7 @@ func ListenAndServe(listener net.Listener,
 	}()
 	ctx := context.Background()
 	var waitDone sync.WaitGroup
-	for true {
+	for {
 		conn, err := listener.Accept()
 		if err != nil {
 			break
@@ -73,5 +73,4 @@ func ListenAndServe(listener net.Listener,
 		}()
 	}
 	waitDone.Wait()
-	return
 }

@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"Gedis/database"
 	databaseface "Gedis/interface/database"
 	"Gedis/lib/logger"
 	"Gedis/lib/sync/atomic"
@@ -26,7 +27,7 @@ type RespHandler struct {
 
 func MakeHandler() *RespHandler {
 	var db databaseface.Database
-	//Todo : 实现Database
+	db = database.NewEchoDatabase()
 	return &RespHandler{
 		db: db,
 	}
