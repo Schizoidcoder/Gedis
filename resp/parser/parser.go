@@ -2,10 +2,12 @@ package parser
 
 import (
 	"Gedis/interface/resp"
+	"Gedis/lib/logger"
 	"Gedis/resp/reply"
 	"bufio"
 	"errors"
 	"io"
+	"runtime/debug"
 	"strconv"
 	"strings"
 )
@@ -34,7 +36,100 @@ func ParseStream(reader io.Reader) <-chan *Payload {
 }
 
 func parse0(reader io.Reader, ch chan<- *Payload) {
-
+	defer func() {
+		if err := recover(); err != nil {
+			logger.Error(string(debug.Stack()))
+		}
+	}()
+	bufReader := bufio.NewReader(reader)
+	var state readState
+	var err error
+	var msg []byte
+	for true {
+		var ioErr bool
+		// 按\r\n读行
+		msg, ioErr, err = readLine(bufReader, &state)
+		if err != nil {
+			if ioErr { //io错误
+				ch <- &Payload{
+					Err: err,
+				}
+				close(ch)
+				return
+			}
+			ch <- &Payload{
+				Err: err,
+			}
+			state = readState{}
+			continue
+		}
+		//判断是不是多行解析模式
+		if !state.readingMultiLine {
+			if msg[0] == '*' { // *3\r\n
+				err = parseMultiBulkHeader(msg, &state)
+				if err != nil {
+					ch <- &Payload{
+						Err: errors.New("protocol error: " + string(msg)),
+					}
+					state = readState{}
+					continue
+				}
+				if state.expectedArgsCount == 0 {
+					ch <- &Payload{
+						Data: &reply.EmptyMultiBulkReply{},
+					}
+					state = readState{}
+					continue
+				}
+			} else if msg[0] == '$' { // $3\r\nPin\r\n
+				err = parseBulkHeader(msg, &state)
+				if err != nil {
+					ch <- &Payload{
+						Err: errors.New("protocol error: " + string(msg)),
+					}
+					state = readState{}
+					continue
+				}
+				if state.expectedArgsCount == -1 { // $-1\r\n
+					ch <- &Payload{
+						Data: &reply.NullBulkReply{},
+					}
+					state = readState{}
+					continue
+				}
+			} else {
+				result, err := parseSingleLineReply(msg)
+				ch <- &Payload{
+					Data: result,
+					Err:  err,
+				}
+				state = readState{}
+				continue
+			}
+		} else {
+			err := readBody(msg, &state)
+			if err != nil {
+				ch <- &Payload{
+					Err: errors.New("protocol error: " + string(msg)),
+				}
+				state = readState{}
+				continue
+			}
+			if state.finished() {
+				var result resp.Reply
+				if state.msgType == '*' {
+					result = reply.MakeMultiBulkReply(state.args)
+				} else if state.msgType == '$' {
+					result = reply.MakeBulkReply(state.args[0])
+				}
+				ch <- &Payload{
+					Data: result,
+					Err:  err,
+				}
+				state = readState{}
+			}
+		}
+	}
 }
 
 func readLine(bufReader *bufio.Reader, state *readState) ([]byte, bool, error) { //第一个是读数据，第二个是有无io错误，true就是有
@@ -127,7 +222,7 @@ func parseSingleLineReply(msg []byte) (resp.Reply, error) {
 	return result, nil
 }
 
-// $0\r\n $3\r\n
+// $0\r\n $3\r\n 长度校验还未实现:$4\r\npin\r\nz\r\n
 func readBody(msg []byte, state *readState) error {
 	line := msg[0 : len(msg)-2]
 	var err error
