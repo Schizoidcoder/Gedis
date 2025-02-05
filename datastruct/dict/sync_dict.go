@@ -101,6 +101,6 @@ func (dict *SyncDict) RandomDistinctKeys(limit int) []string {
 	return result
 }
 
-func (dict *SyncDict) clear() {
+func (dict *SyncDict) Clear() {
 	*dict = *MakeSyncDict() // 旧地址让系统垃圾回收
 }
