@@ -33,9 +33,15 @@ func NewDatabase() *Database {
 		}
 		database.aofHandler = aofHandler
 		for _, db := range database.dbSet {
-			db.addAof = func(line CmdLine) {
-				database.aofHandler.AddAof(db.index, line)
+			sdb := db
+			sdb.addAof = func(line CmdLine) {
+				database.aofHandler.AddAof(sdb.index, line)
 			}
+			/*
+				db.addAof = func(line CmdLine) {
+					database.aofHandler.AddAof(db.index, line)//注意这里db会逃逸到堆上 而db一直会变
+				}
+			*/
 		}
 	}
 	return database
@@ -58,8 +64,8 @@ func (database *Database) Exec(client resp.Connection, args [][]byte) resp.Reply
 		}
 		return execSelect(client, database, args[1:])
 	}
-	dbindex := client.GetDBIndex()
-	db := database.dbSet[dbindex]
+	dbIndex := client.GetDBIndex()
+	db := database.dbSet[dbIndex]
 	return db.Exec(client, args)
 }
 
