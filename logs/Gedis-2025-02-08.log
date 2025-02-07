@@ -10,3 +10,9 @@
 [INFO][handler.go:89] 2025/02/08 00:30:38 handler shutting down
 [INFO][handler.go:56] 2025/02/08 00:30:38 connection closed127.0.0.1:52544
 [INFO][handler.go:89] 2025/02/08 00:30:38 handler shutting down
+[INFO][server.go:37] 2025/02/08 01:14:55 tcp server listening on 0.0.0.0:6379
+[INFO][server.go:66] 2025/02/08 01:14:59 tcp new connection from 127.0.0.1:54419
+[INFO][server.go:49] 2025/02/08 01:16:43 tcp server shutting down
+[INFO][handler.go:89] 2025/02/08 01:16:43 handler shutting down
+[INFO][handler.go:56] 2025/02/08 01:16:43 connection closed127.0.0.1:54419
+[INFO][handler.go:89] 2025/02/08 01:16:43 handler shutting down
