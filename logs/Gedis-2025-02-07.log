@@ -1,0 +1,6 @@
+[INFO][server.go:37] 2025/02/07 16:38:32 tcp server listening on 0.0.0.0:6379
+[INFO][server.go:66] 2025/02/07 16:38:39 tcp new connection from 127.0.0.1:62526
+[INFO][server.go:49] 2025/02/07 16:41:33 tcp server shutting down
+[INFO][handler.go:89] 2025/02/07 16:41:33 handler shutting down
+[INFO][handler.go:56] 2025/02/07 16:41:33 connection closed127.0.0.1:62526
+[INFO][handler.go:89] 2025/02/07 16:41:33 handler shutting down
