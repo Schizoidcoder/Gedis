@@ -9,8 +9,9 @@ import (
 )
 
 type DB struct {
-	index int
-	data  dict.Dict // 不同SyncDict是因为未来可能要换别的实现
+	index  int
+	data   dict.Dict // 不同SyncDict是因为未来可能要换别的实现
+	addAof func(CmdLine)
 }
 
 type CmdLine = [][]byte
@@ -19,7 +20,8 @@ type ExecFunc func(db *DB, args [][]byte) resp.Reply
 
 func makeDB() *DB {
 	db := &DB{
-		data: dict.MakeSyncDict(),
+		data:   dict.MakeSyncDict(),
+		addAof: func(line CmdLine) {}, //先给DB一个空实现，因为如果在数据恢复的时候，你调用了set操作，此时还没有初始化好，如果你set那个key在AppendAof里面，那么后面初始化的时候就可能覆盖
 	}
 	return db
 }
