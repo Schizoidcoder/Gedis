@@ -3,7 +3,11 @@ package aof
 import (
 	"Gedis/config"
 	databaseface "Gedis/interface/database"
+	"Gedis/lib/logger"
+	"Gedis/lib/utils"
+	"Gedis/resp/reply"
 	"os"
+	"strconv"
 )
 
 // CmdLine is alias for [][]byte, represents a command line
@@ -55,9 +59,25 @@ func (handler *AofHandler) AddAof(dbIndex int, cmd CmdLine) {
 	}
 }
 
-// handleAof listen aof channel and write into file
+// handleAof listen aof channel and write into file payload(set k v) <- aofChan
 func (handler *AofHandler) handleAof() {
-	//Todo:payload(set k v) <- aofChan
+	handler.currentDB = 0
+	for p := range handler.aofChan {
+		if p.dbIndex != handler.currentDB {
+			data := reply.MakeMultiBulkReply(utils.ToCmdLine("select", strconv.Itoa(p.dbIndex))).ToBytes()
+			_, err := handler.aofFile.Write(data)
+			if err != nil {
+				logger.Error(err.Error())
+				continue
+			}
+			handler.currentDB = p.dbIndex
+		}
+		data := reply.MakeMultiBulkReply(p.cmdLine).ToBytes()
+		_, err := handler.aofFile.Write(data)
+		if err != nil {
+			logger.Error(err.Error())
+		}
+	}
 }
 
 // LoadAof read aof file
