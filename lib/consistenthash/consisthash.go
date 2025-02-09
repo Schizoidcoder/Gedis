@@ -1,6 +1,9 @@
 package consistenthash
 
-import "hash/crc32"
+import (
+	"hash/crc32"
+	"sort"
+)
 
 type HashFunc func(data []byte) uint32
 type NodeMap struct {
@@ -22,4 +25,30 @@ func NewNodeMap(fn HashFunc) *NodeMap {
 
 func (m *NodeMap) IsEmpty() bool {
 	return len(m.nodeHashMap) == 0
+}
+
+func (m *NodeMap) AddNode(keys ...string) { //可能是节点名称或ip
+	for _, key := range keys {
+		if key == "" {
+			continue
+		}
+		hash := int(m.hashFunc([]byte(key)))
+		m.nodeHashs = append(m.nodeHashs, hash)
+		m.nodeHashMap[hash] = key
+	}
+	sort.Ints(m.nodeHashs)
+}
+
+func (m *NodeMap) PickNode(keys string) string {
+	if m.IsEmpty() {
+		return ""
+	}
+	hash := int(m.hashFunc([]byte(keys)))
+	idx := sort.Search(len(m.nodeHashs), func(i int) bool {
+		return m.nodeHashs[i] >= hash
+	})
+	if idx == len(m.nodeHashs) {
+		idx = 0
+	}
+	return m.nodeHashMap[m.nodeHashs[idx]]
 }
