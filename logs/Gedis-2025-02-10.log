@@ -1,0 +1,14 @@
+[INFO][server.go:37] 2025/02/10 11:57:31 tcp server listening on 0.0.0.0:6379
+[INFO][server.go:49] 2025/02/10 11:57:56 tcp server shutting down
+[INFO][handler.go:95] 2025/02/10 11:57:56 handler shutting down
+[INFO][server.go:37] 2025/02/10 11:59:38 tcp server listening on 0.0.0.0:6379
+[INFO][server.go:66] 2025/02/10 12:02:14 tcp new connection from 127.0.0.1:65079
+[INFO][handler.go:62] 2025/02/10 12:02:41 connection closed127.0.0.1:65079
+[INFO][server.go:49] 2025/02/10 12:33:26 tcp server shutting down
+[INFO][handler.go:95] 2025/02/10 12:33:26 handler shutting down
+[INFO][server.go:37] 2025/02/10 12:36:16 tcp server listening on 0.0.0.0:6379
+[INFO][server.go:66] 2025/02/10 12:36:48 tcp new connection from 127.0.0.1:50153
+[INFO][server.go:49] 2025/02/10 12:39:16 tcp server shutting down
+[INFO][handler.go:95] 2025/02/10 12:39:16 handler shutting down
+[INFO][handler.go:62] 2025/02/10 12:39:16 connection closed127.0.0.1:50153
+[INFO][handler.go:95] 2025/02/10 12:39:16 handler shutting down
